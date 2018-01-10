@@ -1,7 +1,7 @@
 'use strict';
 
 var pizzaAvailableArray = [];
-
+var toppingAvailable = [];
 var toppings = [
     {
         price: 2,
@@ -65,24 +65,20 @@ CPizza.prototype.init = function(pizza) {
     var self = this;
     this.src = pizza.src;
     this.price = pizza.price;
-    this.toppingAvailable = [];
+    
     this.toppingsSelected = [];
     this.name = pizza.name;
     this.description = pizza.description;
-    for(var i = 0; i < toppings.length; i++){
-        var topping = new CTopping();
-        topping.init(toppings[i], this);
-        this.toppingAvailable.push(topping);
-    }
+
     this.div = $('<div id="' + this.name + 'Container" class="pizzaContainer">'
     +'<span class="pizzaTitle">' + this.name + '</span>'
     +'<span id="totalPrice' + this.name + '" class="pizzaPrice">' + this.price + '$</span>'
     +'<img src="' + this.src + '" class="pizzaIcon"/></div>');
-    this.div.click(function () {
-        for(var i = 0; i < self.toppingAvailable.length; i++){
-            $('#' + self.name + 'Container').append(self.toppingAvailable[i].div);
-        }
-    });
+    // this.div.click(function () {
+    //     for(var i = 0; i < self.toppingAvailable.length; i++){
+    //         
+    //     }
+    // });
     $('#container').append(this.div);
 };
 
@@ -117,10 +113,19 @@ CTopping.prototype.init = function(topping, parent) {
         self.parentPizza.addTopping(self);
         self.parentPizza.updatePrice(topping.price);
     });
+    
 };
 
 for(var i = 0; i < pizzaArray.length; i++){
     var pizza = new CPizza();
     pizza.init(pizzaArray[i]);
     pizzaAvailableArray.push(pizzaArray[i]);
+}
+
+for(var i = 0; i < toppings.length; i++){
+    var topping = new CTopping();
+    topping.init(toppings[i], this);
+    this.toppingAvailable.push(topping);
+
+    $('.toppingSelect').append(self.toppingAvailable[i].div);
 }

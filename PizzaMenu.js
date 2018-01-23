@@ -141,5 +141,7 @@ CShop.prototype.init = function(){
 var shop = new CShop();
 shop.init();
 
+console.log("Bla bla");
+
 
 
